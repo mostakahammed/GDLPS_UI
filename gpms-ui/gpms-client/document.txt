@@ -1,0 +1,142 @@
+
+Installation:
+-----------------
+01. Axios 
+    - For api calling.
+    -cli: npm install axios
+
+02. loadash
+    - For manupulating of javascript by using it's various functions
+    - cli: npm install react-lodash
+
+03. Redux 
+    - For managing state in entire application
+    - cli: npm install react-redux
+
+04. React Router Dom
+    - For managing routing
+    - cli: npm install react-router-dom
+           npm install redux-logger
+           npm install redux-thunk
+
+05. Font Awesome
+    - cli:
+        npm i --save @fortawesome/fontawesome-svg-core
+        npm install --save @fortawesome/free-solid-svg-icons
+        npm install --save @fortawesome/react-fontawesome
+
+    - Reference: https://fontawesome.com/icons/warehouse?s=solid
+                 https://fontawesome.com/v5/docs/web/use-with/react
+
+06. Datatable
+    - cli:
+        npm i react-data-table-component
+        npm i styled-components
+
+07. React-toastify
+    - cli:
+        npm install --save react-toastify
+    - Reference:
+        https://github.com/fkhadra/react-toastify#readme
+        https://fkhadra.github.io/react-toastify/introduction/
+
+08. react-confirm-alert
+    - cli:
+        npm install react-confirm-alert --save
+    - Reference:
+        https://github.com/GA-MO/react-confirm-alert
+
+ 09. react-auto-suggest
+     -cli:
+        npm install react-autosuggest --save [Custom CSS 115-175]
+     -Reference
+        https://www.npmjs.com/package/react-autosuggest  
+
+10. react-to-print  
+     -cli:
+        npm install --save react-to-print 
+     -Reference
+        https://codespots.com/library/item/3260    
+
+11. react-barcode 
+      -cli:
+        npm install react-barcode
+     -Reference
+        https://dev.to/readymadecode/create-barcode-in-react-js-or-react-native-apps-33bl 
+
+12. qrcode.react  
+     -cli:
+        npm install qrcode.react  
+     -Reference 
+        https://www.npmjs.com/package/qrcode.react
+
+13. react popup 
+    -cli:
+        npm install react-bootstrap
+     -Reference 
+        https://www.c-sharpcorner.com/article/how-to-create-a-modal-pop-up-in-reactjs-appliaction/
+
+ 14. react multi select 
+     -cli:
+        npm i --save react-select
+     -Reference
+        https://react-select.com/home 
+
+ 14. Title
+     -cli:
+        npm install --save react-helmet
+     -Reference
+        https://github.com/nfl/react-helmet
+
+15. Excel
+    -cli: npm install xlsx
+    code:
+    {
+        const workSheet = XLSX.utils.json_to_sheet(object with key & value/data);
+        const workBook = XLSX.utils.book_new();
+
+        XLSX.utils.book_append_sheet(workBook, workSheet, "students")
+        let buf = XLSX.write(workBook, { bookType: "xlsx", type: "buffer" })
+        //Binary string
+        XLSX.write(workBook, { bookType: "xlsx", type: "binary" })
+        //Download
+         XLSX.writeFile(workBook, "StudentsData.xlsx");
+    }
+
+
+
+
+Deployment: 
+----------------
+01. To publish the client Application run in 
+    -cli:
+    npm run build
+
+02. To download the reWrite file click on below link
+    https://webpihandler.azurewebsites.net/web/handlers/webpi.ashx/getinstaller/urlrewrite2.appids
+
+    -Reference: 
+        https://docs.microsoft.com/en-us/iis/extensions/url-rewrite-module/using-url-rewrite-module-2
+
+03. Create a new file with the name of web.config & the file will contain below code snippet
+    <?xml version="1.0"?>
+    <configuration>
+        <system.webServer>
+            <rewrite>
+                <rules>
+                    <rule name="React Routes" stopProcessing="true">
+                        <match url=".*" />
+                        <conditions logicalGrouping="MatchAll">
+                        <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+                        <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+                        <add input="{REQUEST_URI}" pattern="^/(api)" negate="true" />
+                        </conditions>
+                        <action type="Rewrite" url="/" />
+                    </rule>
+                </rules>
+            </rewrite>
+        </system.webServer>
+    </configuration>
+
+    Now copy & paste this web.config file to publish directory.
+
